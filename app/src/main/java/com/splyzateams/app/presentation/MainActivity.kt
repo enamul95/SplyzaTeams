@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.splyzateams.app.presentation.home_screen.components.HomeScreen
 import com.splyzateams.app.ui.theme.SplyzaTeamsTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,8 +23,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                   // Greeting("Android")
+                    HomeScreen()
                 }
+
 
             }
         }

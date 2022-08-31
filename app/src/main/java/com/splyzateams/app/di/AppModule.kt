@@ -1,6 +1,9 @@
 package com.splyzateams.app.di
 
 import com.splyzateams.app.common.Constrants
+import com.splyzateams.app.data.remote.SplyzaTeamsApi
+import com.splyzateams.app.data.repository.TeamsRepositoryImpl
+import com.splyzateams.app.domain.repository.TeamsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,16 +17,21 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-   /* @Provides
+    @Provides
     @Singleton
-    fun providePaprikaApi():CoinPaprikaApi{
+    fun provideSplyzaTeamsApi():SplyzaTeamsApi{
         return Retrofit.Builder()
             .baseUrl(Constrants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(CoinPaprikaApi::class.java)
+            .create(SplyzaTeamsApi::class.java)
     }
-    */
 
+
+    @Provides
+    @Singleton
+    fun provideTeamsRepository(api: SplyzaTeamsApi):TeamsRepository{
+        return TeamsRepositoryImpl(api)
+    }
 
 }
