@@ -9,10 +9,18 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.splyzateams.app.presentation.home_screen.components.HomeScreen
-import com.splyzateams.app.ui.theme.SplyzaTeamsTheme
+import com.splyzateams.app.presentation.teams.TeamsScreen
 
+import com.splyzateams.app.ui.theme.SplyzaTeamsTheme
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +29,29 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = Color.White
                 ) {
                    // Greeting("Android")
-                    HomeScreen()
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.HomeScreen.route
+                    ) {
+
+                        composable(
+                            route = Screen.HomeScreen.route
+                        ) {
+                            HomeScreen(navController)
+                        }
+
+                        composable(
+                            route = Screen.TeamsScreen.route
+                        ) {
+                            TeamsScreen(navController)
+                        }
+
+                    }
+
                 }
 
 

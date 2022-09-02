@@ -9,10 +9,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.splyzateams.app.domain.model.Teams
+import androidx.navigation.NavController
+import com.splyzateams.app.presentation.Screen
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavController
+
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -21,7 +25,11 @@ fun HomeScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
-        Button(onClick = { }) {
+        Button(onClick = {
+
+            navController.navigate(Screen.TeamsScreen.route)
+
+        }) {
             Text("Invite")
         }
     }

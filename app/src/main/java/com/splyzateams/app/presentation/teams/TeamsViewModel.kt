@@ -1,5 +1,6 @@
 package com.splyzateams.app.presentation.teams
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -23,12 +24,16 @@ class TeamsViewModel @Inject constructor(
     private val _state = mutableStateOf(TeamsState())
     val state:State<TeamsState> = _state
     init {
-        savedStateHandle.get<String>(Constrants.TEAM_ID)?.let { teamId ->
+        /*savedStateHandle.get<String>(Constrants.TEAM_ID)?.let { teamId ->
             getTeamsMember(teamId)
         }
+        */
+
+        getTeamsMember("57994f271ca5dd20847b910c")
     }
 
     private fun getTeamsMember(teamId:String){
+        Log.e("teamId-->",teamId)
         getTeams(teamId).onEach {  result ->
             when(result){
                 is Resource.Success -> {

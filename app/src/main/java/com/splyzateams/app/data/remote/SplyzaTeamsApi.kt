@@ -8,10 +8,10 @@ import retrofit2.http.Path
 
 interface SplyzaTeamsApi {
 
-    @GET("/v1/teams/{teamId}")
+    @GET("v1/teams/{teamId}")
     suspend fun getTeams(@Path("teamId") teamId:String):TeamsDto
 
-    @POST("/v1/teams/{teamId}/invites")
+    @POST("v1/teams/{teamId}/invites")
     suspend fun inviteMember(@Path("teamId") teamId:String):TeamsInvitesDto
 
 
