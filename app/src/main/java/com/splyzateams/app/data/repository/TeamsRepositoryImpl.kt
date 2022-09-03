@@ -4,6 +4,7 @@ import android.util.Log
 import com.splyzateams.app.data.dto.TeamsDto
 import com.splyzateams.app.data.dto.TeamsInvitesDto
 import com.splyzateams.app.data.remote.SplyzaTeamsApi
+import com.splyzateams.app.domain.model.InvitesModel
 import com.splyzateams.app.domain.repository.TeamsRepository
 import javax.inject.Inject
 
@@ -15,7 +16,9 @@ class TeamsRepositoryImpl @Inject constructor(
         return api.getTeams(teamId)
     }
 
-    override suspend fun inviteMember(teamId: String): TeamsInvitesDto {
-        return api.inviteMember(teamId)
+    override suspend fun inviteMember(teamId: String, model: InvitesModel): TeamsInvitesDto {
+        return api.inviteMember(teamId,model)
     }
+
+
 }

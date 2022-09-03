@@ -3,6 +3,7 @@ package com.splyzateams.app.domain.use_case.invite_teams
 import com.splyzateams.app.common.Resource
 import com.splyzateams.app.data.dto.toTeams
 import com.splyzateams.app.data.dto.toTeamsInvites
+import com.splyzateams.app.domain.model.InvitesModel
 import com.splyzateams.app.domain.model.Teams
 import com.splyzateams.app.domain.model.TeamsInvites
 import com.splyzateams.app.domain.repository.TeamsRepository
@@ -18,11 +19,11 @@ class InviteTeams @Inject constructor(
 ) {
     // operator fun invoke use GetTeams as a function
     // Flow use to meet multiple tasking like success, error, loading
-    operator fun invoke(teamId:String):Flow<Resource<TeamsInvites>> = flow {
+    operator fun invoke(teamId: String, model: InvitesModel):Flow<Resource<TeamsInvites>> = flow {
 
         try {
             emit(Resource.Loading())
-            val teams = repository.inviteMember(teamId).toTeamsInvites()
+            val teams = repository.inviteMember(teamId,model).toTeamsInvites()
             emit(Resource.Success(teams))
 
         }catch (e:HttpException){
