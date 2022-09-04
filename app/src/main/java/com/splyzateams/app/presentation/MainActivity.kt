@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.splyzateams.app.presentation.home_screen.components.HomeScreen
+import com.splyzateams.app.presentation.qr_screen.QRScreen
 import com.splyzateams.app.presentation.teams.TeamsScreen
 
 import com.splyzateams.app.ui.theme.SplyzaTeamsTheme
@@ -49,6 +50,15 @@ class MainActivity : ComponentActivity() {
                         ) {
                             TeamsScreen(navController)
                         }
+
+                        composable(
+                            route = Screen.QRScreen.route
+                        ) {
+                           QRScreen(navController)
+
+                        }
+
+
 
                     }
 

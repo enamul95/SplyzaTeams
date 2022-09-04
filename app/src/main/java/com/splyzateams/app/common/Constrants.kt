@@ -15,5 +15,8 @@ object Constrants {
     const val TEAMS_INVITE_PERMISSION = "Invite Permissions"
     const val TEAMS_URL_DES = "Invite URLs are valid for 7 days. Permissions can be changed from the member management view."
     const val TEAMS_SHARE_QR_BUTTON = "Share QR Code"
-    const val TEAMS_COPY_BUTTON = "Copy Link"
+    const val TEAMS_COPY_BUTTON = "Copy the link"
+
+    const val QR_TITLE = "My QR Code"
+    const val QR_URL = "url"
 }

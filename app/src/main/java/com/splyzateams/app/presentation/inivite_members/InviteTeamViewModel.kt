@@ -26,6 +26,12 @@ class InviteTeamViewModel @Inject constructor(
     private val _state = mutableStateOf(InviteTeamsState())
     val state:State<InviteTeamsState> = _state
 
+//    init {
+//        savedStateHandle.get<String>("url")?.let { url ->
+//           Log.e("--",url)
+//        }
+//    }
+
     fun inviteTeamsMember(teamId: String, model: InvitesModel){
         inviteTeams(teamId,model).onEach {  result ->
             when(result){

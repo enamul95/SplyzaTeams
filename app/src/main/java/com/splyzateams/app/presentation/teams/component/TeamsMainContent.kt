@@ -1,5 +1,6 @@
 package com.splyzateams.app.presentation.teams.component
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,15 +9,32 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.splyzateams.app.common.Constrants
+import com.splyzateams.app.presentation.Screen
+import com.splyzateams.app.presentation.inivite_members.InviteTeamViewModel
 import com.splyzateams.app.presentation.teams.TeamsState
 
 
 @Composable
-fun TeamsMainContent(state: TeamsState) {
+fun TeamsMainContent(
+    state: TeamsState,
+    navController: NavController,
+    inviteTeamViewModel: InviteTeamViewModel = hiltViewModel()
+) {
+    val context = LocalContext.current
+    val inviteState = inviteTeamViewModel.state.value
+    val clipboardManager: ClipboardManager = LocalClipboardManager.current
+
+
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -36,7 +54,8 @@ fun TeamsMainContent(state: TeamsState) {
 
                     ) {
 
-                        var currentMember = teams.members.administrators + teams.members.managers + teams.members.editors + teams.members.members
+                        var currentMember =
+                            teams.members.administrators + teams.members.managers + teams.members.editors + teams.members.members
 
                         Text(
                             text = Constrants.TEAMS_CURRENT_MEMBERS + " " + currentMember,
@@ -53,11 +72,11 @@ fun TeamsMainContent(state: TeamsState) {
                     Spacer(modifier = Modifier.height(20.dp))
                     var visible by remember { mutableStateOf(true) }
 
-                    if(teams.plan.supporterLimit == 0){
+                    if (teams.plan.supporterLimit == 0) {
                         visible = false
                     }
 
-                    if(visible){
+                    if (visible) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
@@ -80,10 +99,9 @@ fun TeamsMainContent(state: TeamsState) {
                     }
 
 
-
                     Text(
                         text = Constrants.TEAMS_INVITE_PERMISSION,
-                        style = androidx.compose.material3.MaterialTheme.typography.bodyLarge
+                        style = MaterialTheme.typography.body1
                     )
 
                     TextFieldWithIcons(teams)
@@ -91,14 +109,21 @@ fun TeamsMainContent(state: TeamsState) {
                     Text(
                         text = Constrants.TEAMS_URL_DES,
                         textAlign = TextAlign.Center,
-                        style = androidx.compose.material3.MaterialTheme.typography.bodyLarge
+                        style = MaterialTheme.typography.body1
                     )
-
                     Spacer(modifier = Modifier.height(20.dp))
+
                     //Share Qr button begin
                     Button(
                         onClick = {
-                            //your onclick code
+
+                            inviteState.url.let {
+                                navController.currentBackStackEntry?.savedStateHandle?.apply {
+                                    set(Constrants.QR_URL, inviteState.url)
+                                }
+                                navController.navigate(Screen.QRScreen.route)
+                            }
+
                         }, colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -113,10 +138,14 @@ fun TeamsMainContent(state: TeamsState) {
                             modifier = Modifier.padding(5.dp)
                         )
                     }
-                   // Copy the link Button
+                    // Copy the link Button
                     Button(
                         onClick = {
-                            //your onclick code
+                            inviteState.url.let {
+                                clipboardManager.setText(AnnotatedString(("" + inviteState.url)))
+                                Toast.makeText(context, Constrants.TEAMS_COPY_BUTTON, Toast.LENGTH_LONG).show()
+                            }
+
                         }, colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray),
                         modifier = Modifier
                             .fillMaxWidth()

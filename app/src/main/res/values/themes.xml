@@ -7,4 +7,9 @@
         <item name="android:statusBarColor">@color/purple_700</item>
         <item name="android:windowBackground">@color/purple_700</item>
     </style>
+
+    <style name="Theme.SplyzaTeams.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>
