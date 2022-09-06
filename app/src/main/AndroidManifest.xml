@@ -17,12 +17,7 @@
         android:theme="@style/Theme.SplyzaTeams"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".presentation.qr_screen.ShareQRActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"  />
+
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"

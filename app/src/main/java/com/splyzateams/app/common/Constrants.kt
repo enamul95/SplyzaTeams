@@ -4,6 +4,8 @@ object Constrants {
 
     const val BASE_URL = "http://202.40.191.226:8081/splyza-teams/"
     const val TEAM_ID = "teamId";
+    const val id = "57994f271ca5dd20847b910c"
+
 
     const val HOME_INVITE = "Invite"
 
@@ -16,6 +18,9 @@ object Constrants {
     const val TEAMS_URL_DES = "Invite URLs are valid for 7 days. Permissions can be changed from the member management view."
     const val TEAMS_SHARE_QR_BUTTON = "Share QR Code"
     const val TEAMS_COPY_BUTTON = "Copy the link"
+    const val TEAMS_SELECT_PERMISSION = "Please Select Permission."
+    const val TEAMS_SELECT_PERMISSION_LABEL = "Select Invitation Permission"
+
 
     const val QR_TITLE = "My QR Code"
     const val QR_URL = "url"

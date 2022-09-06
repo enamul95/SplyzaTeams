@@ -50,53 +50,47 @@ fun CustomAlertDialog(
                 items(permissionList.size) {
                     val item = permissionList[it]
 
-                   if(teams.plan.supporterLimit == 0 && item.role == "readonly"){
-                       // hide supporter
-                    }else{
-                       Column(
-                           modifier = Modifier
-                               .padding(all = 10.dp)
-                               .background(
-                                   Color.White
-                               )
-                               .fillMaxWidth()
-                               .clickable() {
-                                   onItemClick(item)
-                               },
+                    if ((teams.plan?.supporterLimit ?: 0) == 0 && item.role == "readonly") {
+                        // hide supporter
+                    } else {
+                        Column(
+                            modifier = Modifier
+                                .padding(all = 10.dp)
+                                .background(
+                                    Color.White
+                                )
+                                .fillMaxWidth()
+                                .clickable() {
+                                    onItemClick(item)
+                                },
 
 
-                           ) {
-                           Text(
-                               item.roleDes, fontSize = 18.sp,
-                               textAlign = TextAlign.Center,
-                               color = Color.Blue,
-                               modifier = Modifier
-                                   .fillMaxSize()
-                                   .wrapContentHeight()
-                                   .padding(10.dp)
-                           )
+                            ) {
+                            Text(
+                                item.roleDes, fontSize = 18.sp,
+                                textAlign = TextAlign.Center,
+                                color = Color.Blue,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .wrapContentHeight()
+                                    .padding(10.dp)
+                            )
 
-                           Divider(
-                               color = Color.LightGray,
-                               modifier = Modifier
-                                   .fillMaxWidth(),
-                               thickness = 1.dp,
-                               startIndent = 20.dp
-                           )
+                            Divider(
+                                color = Color.LightGray,
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                thickness = 1.dp,
+                                startIndent = 20.dp
+                            )
 
-
-                       }
+                        }
                     }
-
-
-
 
 
                 }
 
             }
-
-
         }
 
     }

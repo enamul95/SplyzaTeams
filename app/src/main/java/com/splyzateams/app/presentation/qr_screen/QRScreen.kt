@@ -71,13 +71,9 @@ fun QRScreen(
         },
 
         content = {
-
             if (url != null) {
                 QrCode(url)
             }
-
-
-
         },
         backgroundColor = Color(0xFFEDEAE0)
 

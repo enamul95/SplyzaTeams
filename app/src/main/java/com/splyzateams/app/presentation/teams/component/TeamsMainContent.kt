@@ -55,7 +55,8 @@ fun TeamsMainContent(
                     ) {
 
                         var currentMember =
-                            teams.members.administrators + teams.members.managers + teams.members.editors + teams.members.members
+                            (teams.members?.administrators ?: 0) + (teams.members?.managers ?: 0) + (teams.members?.editors
+                                ?: 0) + (teams.members?.members ?: 0)
 
                         Text(
                             text = Constrants.TEAMS_CURRENT_MEMBERS + " " + currentMember,
@@ -63,7 +64,7 @@ fun TeamsMainContent(
                             modifier = Modifier.weight(1.2f)
                         )
                         Text(
-                            text = Constrants.LIMIT + " " + teams.plan.memberLimit,
+                            text = Constrants.LIMIT + " " + (teams.plan?.memberLimit ?: 0),
                             style = MaterialTheme.typography.body1,
                             textAlign = TextAlign.End,
                             modifier = Modifier.weight(.8f)
@@ -72,7 +73,7 @@ fun TeamsMainContent(
                     Spacer(modifier = Modifier.height(20.dp))
                     var visible by remember { mutableStateOf(true) }
 
-                    if (teams.plan.supporterLimit == 0) {
+                    if ((teams.plan?.supporterLimit ?: 0) == 0) {
                         visible = false
                     }
 
@@ -84,12 +85,13 @@ fun TeamsMainContent(
                         ) {
 
                             Text(
-                                text = Constrants.TEAMS_CURRENT_SUPPORTERS + " " + teams.members.supporters,
+                                text = Constrants.TEAMS_CURRENT_SUPPORTERS + " " + (teams.members?.supporters
+                                    ?: 0),
                                 style = MaterialTheme.typography.body1,
                                 modifier = Modifier.weight(1.2f)
                             )
                             Text(
-                                text = Constrants.LIMIT + " " + teams.plan.supporterLimit,
+                                text = Constrants.LIMIT + " " + (teams.plan?.supporterLimit ?: 0),
                                 style = MaterialTheme.typography.body1,
                                 textAlign = TextAlign.End,
                                 modifier = Modifier.weight(.8f)
@@ -117,11 +119,13 @@ fun TeamsMainContent(
                     Button(
                         onClick = {
 
-                            inviteState.url.let {
+                            if(inviteState.url.isNotBlank()){
                                 navController.currentBackStackEntry?.savedStateHandle?.apply {
                                     set(Constrants.QR_URL, inviteState.url)
                                 }
                                 navController.navigate(Screen.QRScreen.route)
+                            }else{
+                                Toast.makeText(context, Constrants.TEAMS_SELECT_PERMISSION, Toast.LENGTH_LONG).show()
                             }
 
                         }, colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray),
@@ -141,9 +145,13 @@ fun TeamsMainContent(
                     // Copy the link Button
                     Button(
                         onClick = {
-                            inviteState.url.let {
-                                clipboardManager.setText(AnnotatedString(("" + inviteState.url)))
-                                Toast.makeText(context, Constrants.TEAMS_COPY_BUTTON, Toast.LENGTH_LONG).show()
+                            if(inviteState.url.isNotBlank()){
+                                inviteState.url.let {
+                                    clipboardManager.setText(AnnotatedString(("" + inviteState.url)))
+                                    Toast.makeText(context, Constrants.TEAMS_COPY_BUTTON, Toast.LENGTH_LONG).show()
+                                }
+                            }else{
+                                Toast.makeText(context, Constrants.TEAMS_SELECT_PERMISSION, Toast.LENGTH_LONG).show()
                             }
 
                         }, colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray),

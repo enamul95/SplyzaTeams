@@ -23,17 +23,12 @@ class TeamsViewModel @Inject constructor(
 
     private val _state = mutableStateOf(TeamsState())
     val state:State<TeamsState> = _state
-    init {
-        /*savedStateHandle.get<String>(Constrants.TEAM_ID)?.let { teamId ->
-            getTeamsMember(teamId)
-        }
-        */
 
-        getTeamsMember("57994f271ca5dd20847b910c")
+    init {
+        getTeamsMember(Constrants.id)
     }
 
     private fun getTeamsMember(teamId:String){
-        Log.e("teamId-->",teamId)
         getTeams(teamId).onEach {  result ->
             when(result){
                 is Resource.Success -> {

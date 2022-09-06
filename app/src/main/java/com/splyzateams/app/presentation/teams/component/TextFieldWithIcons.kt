@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.splyzateams.app.common.Constrants
 import com.splyzateams.app.domain.model.InvitesModel
 import com.splyzateams.app.domain.model.Teams
 import com.splyzateams.app.presentation.inivite_members.InviteTeamViewModel
@@ -40,27 +41,28 @@ fun TextFieldWithIcons(
             {
 
                 if("manager" == it.role ||"editor"== it.role||"member"== it.role){
-                    var currentMember = teams.members.administrators + teams.members.managers + teams.members.editors + teams.members.members
-                    if(currentMember <= teams.plan.memberLimit){
+                    var currentMember = (teams.members?.administrators ?: 0) + (teams.members?.managers
+                        ?: 0) + (teams.members?.editors ?: 0) + (teams.members?.members ?: 0)
+                    if(currentMember <= (teams.plan?.memberLimit ?: 0)){
                         if("readonly" == it.role){
                             showCustomDialog = true
                         }else{
                             permissionTextState = it.roleDes
                             role = it.role
                             showCustomDialog = false
-                            changeRole(inviteTeamViewModel,role,teams.id)
+                            teams.id?.let { it1 -> changeRole(inviteTeamViewModel,role, it1) }
 
                         }
 
                     }
                 } else if("readonly" == it.role){
-                    if(teams.members.supporters <= teams.plan.supporterLimit){
+                    if((teams.members?.supporters ?: 0) <= (teams.plan?.supporterLimit ?: 0)){
                         showCustomDialog = true
                     }else{
                         permissionTextState = it.roleDes
                         role = it.role
                         showCustomDialog = false
-                        changeRole(inviteTeamViewModel,role,teams.id)
+                        teams.id?.let { it1 -> changeRole(inviteTeamViewModel,role, it1) }
 
                     }
                 }
@@ -97,7 +99,7 @@ fun TextFieldWithIcons(
             focusedLabelColor = Color.LightGray,
             cursorColor = Color.LightGray
         ),
-        label = { Text(text = "Select Invitation Permission", color = Color.LightGray) },
+        label = { Text(text = Constrants.TEAMS_SELECT_PERMISSION_LABEL, color = Color.LightGray) },
     )
 
 }
