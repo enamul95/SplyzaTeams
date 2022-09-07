@@ -73,11 +73,13 @@ fun TeamsMainContent(
                     Spacer(modifier = Modifier.height(20.dp))
                     var visible by remember { mutableStateOf(true) }
 
+                    /*
                     if ((teams.plan?.supporterLimit ?: 0) == 0) {
                         visible = false
                     }
+                    */
 
-                    if (visible) {
+                  //  if (visible) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
@@ -98,7 +100,7 @@ fun TeamsMainContent(
                             )
                         }
                         Spacer(modifier = Modifier.height(20.dp))
-                    }
+                   // }
 
 
                     Text(

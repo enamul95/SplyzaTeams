@@ -1,5 +1,6 @@
 package com.splyzateams.app.presentation.teams.component
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -50,7 +51,7 @@ fun CustomAlertDialog(
                 items(permissionList.size) {
                     val item = permissionList[it]
 
-                    if ((teams.plan?.supporterLimit ?: 0) == 0 && item.role == "readonly") {
+                    if ((teams.plan?.supporterLimit) == 0 && item.role == "readonly") {
                         // hide supporter
                     } else {
                         Column(

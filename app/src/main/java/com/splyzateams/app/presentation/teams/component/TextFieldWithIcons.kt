@@ -56,7 +56,7 @@ fun TextFieldWithIcons(
 
                     }
                 } else if("readonly" == it.role){
-                    if((teams.members?.supporters ?: 0) <= (teams.plan?.supporterLimit ?: 0)){
+                    if((teams.plan?.supporterLimit ?: 0)>=(teams.members?.supporters ?: 0)){
                         showCustomDialog = true
                     }else{
                         permissionTextState = it.roleDes
