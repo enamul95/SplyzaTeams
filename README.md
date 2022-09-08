@@ -23,6 +23,6 @@
 - di - contain the provided functions
 - common - contain the provided functions
 
-#Connection
+# Connection
  - If the connection to splyza-team (provided spring boot service) service. Please Go to SplyzaTeams->com.splyzateams.app.common.Constrants-> put your IP to BASE_URL 
 
