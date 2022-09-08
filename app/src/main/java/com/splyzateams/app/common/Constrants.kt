@@ -3,7 +3,6 @@ package com.splyzateams.app.common
 object Constrants {
 
     const val BASE_URL = "http://202.40.191.226:8081/splyza-teams/"
-    const val TEAM_ID = "teamId";
     const val id = "57994f271ca5dd20847b910c"
 
 
