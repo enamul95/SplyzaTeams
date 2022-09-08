@@ -26,3 +26,6 @@
 # Connection
  - Run splyza-team (provided spring boot service) service. Please Go to SplyzaTeams->com.splyzateams.app.common.Constrants-> put your IP to BASE_URL 
 
+# Share screenshots
+ - Please check some screenshots SplyzaTeams folder from the like https://drive.google.com/drive/folders/1lVmlVvsNRpC4Ph3lPk8LnMV04_V8y6KZ?usp=sharing
+
