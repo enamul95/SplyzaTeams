@@ -24,5 +24,5 @@
 - common - contain the provided functions
 
 # Connection
- - If the connection to splyza-team (provided spring boot service) service. Please Go to SplyzaTeams->com.splyzateams.app.common.Constrants-> put your IP to BASE_URL 
+ - Run splyza-team (provided spring boot service) service. Please Go to SplyzaTeams->com.splyzateams.app.common.Constrants-> put your IP to BASE_URL 
 
